@@ -41,10 +41,10 @@
     <div class="prepared"><i></i> Prepared for Direct Connect Logistix &middot; September 2026</div>
     <h1>Cash applied on arrival, and rate drift caught <em>while the window is open</em></h1>
     <div class="hero-figure">
-      <span class="hero-cash">$2.2M</span>
+      <span class="hero-cash">$1.6M</span>
       <p class="hero-cash-label">
-        of three-year benefit: revenue recovered before the rebill window closes, working capital
-        out of the past-due book, and the next AR hire deferred.
+        of three-year benefit from one modest day of DSO, the hours the AR function gets back,
+        and the next hire deferred. Fuel drift recovery is upside on top, not counted here.
       </p>
     </div>
     <p class="sub">
@@ -60,7 +60,7 @@
   <div class="hero-facts">
     <div><strong>$1,095,890</strong><span>One day of DSO at $400M of revenue</span></div>
     <div><strong>13,000 / mo</strong><span>Invoices against one cash application seat</span></div>
-    <div><strong>42 &rarr; 40.8</strong><span>DSO today against the modelled lever</span></div>
+    <div><strong id="hf-dso">42 &rarr; 41</strong><span>DSO today against the modelled lever</span></div>
     <div><strong>3&ndash;4 weeks</strong><span>NetSuite connected and applying cash</span></div>
   </div>
 </section>
@@ -70,52 +70,56 @@
   <p class="eyebrow">The business case</p>
   <h2>Model it with <em>your own numbers</em>.</h2>
   <p class="lede">
-    Every input is editable. The defaults are the figures from the August 25 and September 1 calls:
-    $400M of revenue, DSO at 42 against weighted terms of net 39, and revenue leakage Keegan sized
-    off the cuff at a couple hundred thousand dollars. Cost of capital and the loaded cost of an AR
-    hire are placeholders. Overwrite them with yours.
+    Three levers, all of them deliberately conservative: a single day of DSO, the hours the AR
+    function gets back, and the hire that defers. $400M of revenue and DSO at 42 against weighted
+    terms of net 39 are your figures from the August 25 call. Cost of capital and the loaded cost of
+    a hire are placeholders. Overwrite them with yours.
   </p>
 
   <div class="scenario-control" role="group" aria-label="Scenario" style="margin-top:30px">
-    <button class="chip" data-reduction="25" data-scenario>Conservative &middot; 25%</button>
-    <button class="chip" data-reduction="40" data-scenario aria-pressed="true">Base case &middot; 40%</button>
-    <button class="chip" data-reduction="60" data-scenario>Aggressive &middot; 60%</button>
+    <button class="chip" data-days="0.5" data-scenario>Conservative &middot; half a day</button>
+    <button class="chip" data-days="1" data-scenario aria-pressed="true">Base case &middot; one day</button>
+    <button class="chip" data-days="1.5" data-scenario>Upside &middot; a day and a half</button>
   </div>
 
   <div class="calc">
     <div class="calc-inputs">
       <div class="calc-group">
-        <h3>Your inputs</h3>
+        <h3>Working capital</h3>
         <label class="calc-field">
           <span>Revenue this year<small>$400M, Keegan, August 25</small></span>
           <input id="rev" type="number" value="400000000" step="10000000"/>
         </label>
         <label class="calc-field">
-          <span>AR balance today<small>Derived: DSO 42 x $400M / 365</small></span>
-          <input id="ar" type="number" value="46000000" step="1000000"/>
-        </label>
-        <label class="calc-field">
-          <span>Past-due AR today<small>Derived: DSO 42 less terms 39 = 3 days</small></span>
-          <input id="pastdue" type="number" value="3300000" step="100000"/>
-        </label>
-        <label class="calc-field">
-          <span>Reduction on past-due AR (%)<small>The lever. 40% is 1.2 DSO days</small></span>
-          <input id="reduction" type="number" value="40" step="5"/>
+          <span>DSO improvement (days)<small>Against 42 today, on weighted terms of net 39</small></span>
+          <input id="days" type="number" value="1" step="0.1"/>
         </label>
         <label class="calc-field">
           <span>Cost of capital (%)<small>Placeholder. Usually the revolver rate</small></span>
           <input id="coc" type="number" value="9" step="0.5"/>
         </label>
+      </div>
+
+      <div class="calc-group">
+        <h3>Hours returned</h3>
         <label class="calc-field">
-          <span>Annual revenue leakage<small>Underbilling and fuel drift. Confirm</small></span>
-          <input id="leakage" type="number" value="250000" step="25000"/>
+          <span>Hours a week, cash application<small>One seat, most of a day, every day</small></span>
+          <input id="hrscash" type="number" value="24" step="1"/>
         </label>
         <label class="calc-field">
-          <span>Share recoverable in the window (%)<small>Still collectable inside 60 or 90 days</small></span>
-          <input id="share" type="number" value="50" step="5"/>
+          <span>Hours a week, research and prep<small>Rate lookups, chasing remits, meeting prep</small></span>
+          <input id="hrsother" type="number" value="11" step="1"/>
+        </label>
+      </div>
+
+      <div class="calc-group">
+        <h3>Headcount</h3>
+        <label class="calc-field">
+          <span>AR hires avoided<small>10 to 15 thousand loads from the tipping point</small></span>
+          <input id="hires" type="number" value="1" step="1"/>
         </label>
         <label class="calc-field">
-          <span>Loaded cost of an AR hire<small>Deferred in years one and two</small></span>
+          <span>Fully loaded cost of a hire<small>Deferred in years one and two</small></span>
           <input id="hire" type="number" value="85000" step="5000"/>
         </label>
       </div>
@@ -124,32 +128,32 @@
     <div class="results-column">
       <div class="cash-result">
         <p>Three-year benefit</p>
-        <strong id="o-threeyear">$2.22M</strong>
+        <strong id="o-threeyear">$1.56M</strong>
         <span>
-          <b id="o-release">$1.32M</b> of working capital out of the past-due book, plus recurring
-          value across three years. That is <b id="o-daysout">1.2</b> days of DSO, taking
-          <b id="o-dsonow">42</b> to <b id="o-dsonew">40.8</b>.
+          <b id="o-release">$1.10M</b> of working capital released once, plus recurring value across
+          three years. That is <b id="o-days">1</b> day of DSO, taking 42 to <b id="o-dsonew">41</b>.
         </span>
         <div class="result-tiles">
-          <div><strong id="o-recurring">$329K</strong><span>Recurring annual value</span></div>
-          <div><strong>1,820</strong><span>Hours a year returned to AR</span></div>
-          <div><strong id="o-roi">3.6&times;</strong><span>Year-one return</span></div>
-          <div><strong id="o-payback">3 mo</strong><span>Payback period</span></div>
+          <div><strong id="o-recurring">$184K</strong><span>Recurring annual value</span></div>
+          <div><strong id="o-hours">1,820</strong><span>Hours a year returned to AR</span></div>
+          <div><strong id="o-roi">2.0&times;</strong><span>Year-one return</span></div>
+          <div><strong id="o-payback">6 mo</strong><span>Payback period</span></div>
         </div>
       </div>
 
       <div class="value-card">
         <h3>How it builds</h3>
-        <div class="bridge-row"><span class="lbl">Working capital out of the past-due book, once</span><span class="val" id="b-release">$1.32M</span></div>
-        <div class="bridge-row"><span class="lbl">Carrying benefit on that release, per year</span><span class="val" id="b-carry">$119K</span></div>
-        <div class="bridge-row"><span class="lbl">Fuel drift and underbilling recovered, per year</span><span class="val" id="b-fuel">$125K</span></div>
-        <div class="bridge-row"><span class="lbl">AR hire deferred, years one and two</span><span class="val" id="b-hire">$85K</span></div>
-        <div class="bridge-row total"><span class="lbl">Year-one recurring value</span><span class="val" id="b-total">$329K</span></div>
+        <div class="bridge-row"><span class="lbl">Working capital released, once</span><span class="val" id="b-release">$1.10M</span></div>
+        <div class="bridge-row"><span class="lbl">Carrying benefit on that release, per year</span><span class="val" id="b-carry">$99K</span></div>
+        <div class="bridge-row"><span class="lbl">Hours returned to the AR function, per year</span><span class="val" id="b-hours">1,820 hrs</span></div>
+        <div class="bridge-row"><span class="lbl">AR hire deferred, years one and two</span><span class="val" id="b-head">$85K</span></div>
+        <div class="bridge-row total"><span class="lbl">Year-one recurring value</span><span class="val" id="b-total">$184K</span></div>
         <p class="note">
-          The AR balance and the past-due figure are both derived, because no bucketed aging report
-          has been shared yet. Send the aging by bucket and these sharpen immediately. Hours are a
-          count, not a dollar line: they are what defers the hire, so they are not counted twice.
-          One day of DSO at $400M is <b id="o-perday">$1,095,890</b>.
+          Hours are a count, not a dollar line. <b id="o-fte">0.88</b> of a full-time equivalent is
+          what defers the hire, so it is monetised once, through headcount, and never twice. Fuel
+          drift and underbilling recovery are left out of this model entirely: Keegan sized that at a
+          couple hundred thousand a year, and the case does not need it. One day of DSO at $400M is
+          <b id="o-perday">$1,095,890</b>.
         </p>
       </div>
     </div>
@@ -599,8 +603,8 @@
   <div>
     <div class="handoff-result">
       <span>Your scenario</span>
-      <strong id="h-three">$2.22M</strong>
-      <p>three-year benefit at <b id="h-days">1.2</b> days of DSO out of the past-due book</p>
+      <strong id="h-three">$1.56M</strong>
+      <p>three-year benefit at <b id="h-days">1</b> day of sustained DSO improvement</p>
     </div>
     <a class="btn btn-primary" href="mailto:michael@monk.com?subject=Monk%20%C3%97%20DCL%20%E2%80%94%20next%20step">Email Michael</a>
   </div>

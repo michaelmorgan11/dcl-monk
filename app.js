@@ -29,43 +29,49 @@
     return usd(n);
   }
 
-  /* ---------- model ---------- */
+  /* ---------- model ----------
+     Three conservative levers only: a modest DSO improvement, the hours the AR
+     function gets back, and the hire that defers. Revenue leakage from fuel drift
+     is deliberately NOT counted here - it is real and Keegan sized it himself, but
+     the case does not need it, so it stays upside rather than an assumption a CFO
+     has to accept. Hours are the mechanism behind the deferred hire, so they are
+     reported as a count and monetised once, through headcount, never twice. */
   function model() {
-    var rev       = +$('rev').value     || 0;
-    var pastDue   = +$('pastdue').value || 0;
-    var reduction = (+$('reduction').value || 0) / 100;
-    var coc       = (+$('coc').value    || 0) / 100;
-    var leakage   = +$('leakage').value || 0;
-    var share     = (+$('share').value  || 0) / 100;
-    var hire      = +$('hire').value    || 0;
+    var rev     = +$('rev').value    || 0;
+    var days    = +$('days').value   || 0;
+    var coc     = (+$('coc').value   || 0) / 100;
+    var hrsCash = +$('hrscash').value || 0;
+    var hrsOther= +$('hrsother').value || 0;
+    var hires   = +$('hires').value  || 0;
+    var hire    = +$('hire').value   || 0;
 
-    var HIRE_YEARS = 2;   // deferred in years 1 and 2; year 3 assumes they hire anyway
-    var perDay  = rev / 365;
-    var arBal   = +$('ar').value || 0;
+    var HIRE_YEARS = 2;      // deferred in years one and two
+    var FTE_HOURS  = 2080;   // one full-time equivalent year
 
-    var release = pastDue * reduction;      // comes out of the past-due book, once
-    var carry   = release * coc;            // what that released cash is worth a year
-    var fuel    = leakage * share;          // drift caught inside the rebill window
+    var perDay    = rev / 365;
+    var release   = perDay * days;        // working capital, comes out once
+    var carry     = release * coc;        // what that release is worth each year
+    var hoursYear = (hrsCash + hrsOther) * 52;
+    var headcount = hires * hire;
 
     var years = [];
-    for (var y = 1; y <= HORIZON; y++) {
-      var h = y <= HIRE_YEARS ? hire : 0;
-      years.push({ carry: carry, fuel: fuel, hire: h, recurring: carry + fuel + h });
+    for (var y = 1; y <= HIRE_YEARS + 1; y++) {
+      var h = y <= HIRE_YEARS ? headcount : 0;
+      years.push({ carry: carry, head: h, recurring: carry + h });
     }
     var recurringTotal = years.reduce(function (s, y) { return s + y.recurring; }, 0);
     var y1 = years[0];
 
     return {
       perDay:    perDay,
-      arBal:     arBal,
-      dsoNow:    perDay > 0 ? arBal / perDay : 0,
-      daysOut:   perDay > 0 ? release / perDay : 0,
+      days:      days,
+      dsoNow:    42,
       release:   release,
       carry:     carry,
-      fuel:      fuel,
-      hire:      y1.hire,
+      hoursYear: hoursYear,
+      fte:       hoursYear / FTE_HOURS,
+      headcount: headcount,
       y1:        y1,
-      // the release comes out once and stays out, so it is added, never summed
       threeYear: recurringTotal + release,
       roi:       ANNUAL_FEE > 0 ? y1.recurring / ANNUAL_FEE : 0,
       payback:   y1.recurring > 0 ? ANNUAL_FEE / (y1.recurring / 12) : 0
@@ -80,22 +86,26 @@
     $('o-threeyear').textContent = compact(m.threeYear);
     $('o-release').textContent   = compact(m.release);
     $('o-recurring').textContent = compact(m.y1.recurring);
-    $('o-roi').textContent       = m.roi.toFixed(1) + '×';
-    $('o-payback').textContent   = m.payback > 0 ? Math.max(1, Math.round(m.payback)) + ' mo' : '—';
+    $('o-roi').textContent       = m.roi.toFixed(1) + '\u00D7';
+    $('o-payback').textContent   = m.payback > 0 ? Math.max(1, Math.round(m.payback)) + ' mo' : '\u2014';
+    $('o-hours').textContent     = Math.round(m.hoursYear).toLocaleString('en-US');
 
-    $('o-daysout').textContent   = r1(m.daysOut);
-    $('o-dsonow').textContent    = r1(m.dsoNow);
-    $('o-dsonew').textContent    = r1(m.dsoNow - m.daysOut);
+    $('o-days').textContent      = r1(m.days);
+    $('o-dsonew').textContent    = r1(m.dsoNow - m.days);
     $('o-perday').textContent    = usd(m.perDay);
+    $('o-fte').textContent       = m.fte.toFixed(2);
 
     $('b-release').textContent   = compact(m.release);
     $('b-carry').textContent     = compact(m.carry);
-    $('b-fuel').textContent      = compact(m.fuel);
-    $('b-hire').textContent      = compact(m.hire);
+    $('b-hours').textContent     = Math.round(m.hoursYear).toLocaleString('en-US') + ' hrs';
+    $('b-head').textContent      = compact(m.headcount);
     $('b-total').textContent     = compact(m.y1.recurring);
 
     $('h-three').textContent     = compact(m.threeYear);
-    $('h-days').textContent      = r1(m.daysOut);
+    $('h-days').textContent      = r1(m.days);
+
+    var hf = $('hf-dso');
+    if (hf) { hf.textContent = '42 \u2192 ' + r1(m.dsoNow - m.days); }
 
     drawChart();
   }
@@ -169,7 +179,7 @@
   }
 
   /* ---------- wiring ---------- */
-  ['rev', 'ar', 'pastdue', 'reduction', 'coc', 'leakage', 'share', 'hire'].forEach(function (id) {
+  ['rev', 'days', 'coc', 'hrscash', 'hrsother', 'hires', 'hire'].forEach(function (id) {
     var el = $(id);
     if (el) { el.addEventListener('input', function () { syncChips(); render(); }); }
   });
@@ -177,15 +187,15 @@
   var chips = [].slice.call(document.querySelectorAll('[data-scenario]'));
 
   function syncChips() {
-    var v = +$('reduction').value;
+    var v = +$('days').value;
     chips.forEach(function (c) {
-      c.setAttribute('aria-pressed', String(+c.dataset.reduction === v));
+      c.setAttribute('aria-pressed', String(+c.dataset.days === v));
     });
   }
 
   chips.forEach(function (c) {
     c.addEventListener('click', function () {
-      $('reduction').value = +c.dataset.reduction;
+      $('days').value = +c.dataset.days;
       syncChips();
       render();
     });
