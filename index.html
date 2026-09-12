@@ -293,7 +293,173 @@
     </div>
   </div>
 
-  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">The remittances <em>your team called headaches</em>.</h2>
+  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">Your six exceptions, <em>one by one</em>.</h2>
+  <p class="lede">
+    Every one of these came off your own remittances. Each shows what triggers it, what Monk does,
+    and the fork at the end: resolved on its own, or handed to your team with the reasoning shown.
+  </p>
+
+  <div class="exc-slider" data-slider>
+    <div class="slider-bar">
+      <div class="slider-count"><b id="sl-now">1</b> / 6</div>
+      <div class="slider-nav">
+        <button class="slider-btn" type="button" data-prev aria-label="Previous exception">&#8592;</button>
+        <button class="slider-btn" type="button" data-next aria-label="Next exception">&#8594;</button>
+      </div>
+    </div>
+    <div class="slider-viewport">
+      <div class="slider-track" data-track>
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Exception 01 of 6: Remittance in any format">
+          <div class="slide-grid">
+            <div>
+              <div class="slide-n">Exception 01</div>
+              <h3>Remittance in any format</h3>
+              <span class="slide-trigger"><b>Trigger</b><br/>A remittance PDF or Excel hits the AR inbox</span>
+              <p style="font-family:var(--font-display);font-size:20px;color:var(--brown);margin:0 0 12px">Read on arrival</p>
+              <ul>
+            <li>Monk reads the file the moment it lands, PDF or Excel, whatever layout the payer uses</li>
+            <li>Every line is pulled out: amount, payer, date, check number, memo and references</li>
+            <li>Order numbers, BOL numbers and a payer's own codes all map back to the load</li>
+              </ul>
+            </div>
+            <div>
+          <div class="flow-step"><i class="rail"></i><b>1</b><div><strong>File read on arrival</strong><span>Every remittance line is pulled out separately, capturing amount, payer, date, check number and memo.</span></div></div>
+          <div class="flow-step"><i class="rail"></i><b>2</b><div><strong>References matched to open invoices</strong><span>Every order, BOL and payer reference code is mapped back against the open book.</span></div></div>
+              <div class="fork">
+                <div class="auto"><span>Auto-resolved</span><p>Reference and amount both match, so the invoice closes.</p></div>
+                <div class="human"><span>Human review</span><p>A format Monk has not seen. Fixed once, then automatic.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Exception 02 of 6: Payer names with no match">
+          <div class="slide-grid">
+            <div>
+              <div class="slide-n">Exception 02</div>
+              <h3>Payer names with no match</h3>
+              <span class="slide-trigger"><b>Trigger</b><br/>A deposit arrives from an unrecognised payer name</span>
+              <p style="font-family:var(--font-display);font-size:20px;color:var(--brown);margin:0 0 12px">Matched on the whole family</p>
+              <ul>
+            <li>The payer name on the deposit is searched against every customer you bill</li>
+            <li>Then against their parent, child and sibling companies, legal names included</li>
+            <li>A name you confirm is saved as an alias, so the next one matches on its own</li>
+              </ul>
+            </div>
+            <div>
+          <div class="flow-step"><i class="rail"></i><b>1</b><div><strong>Related companies checked</strong><span>Parent, child and sibling companies of each match are pulled. Banks usually send the legal name, so both are compared.</span></div></div>
+          <div class="flow-step"><i class="rail"></i><b>2</b><div><strong>New name proposed as a saved alias</strong><span>XYZ Holdings LLC is matched to the XYZ Distribution account, and the alias holds from then on.</span></div></div>
+              <div class="fork">
+                <div class="auto"><span>Auto-resolved</span><p>A related name matches, so the payment applies to the right customer.</p></div>
+                <div class="human"><span>Human review</span><p>Nothing matches. Sent over with the closest options listed.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Exception 03 of 6: One payment, many customers">
+          <div class="slide-grid">
+            <div>
+              <div class="slide-n">Exception 03</div>
+              <h3>One payment, many customers</h3>
+              <span class="slide-trigger"><b>Trigger</b><br/>One vendor payment covering three or more customers</span>
+              <p style="font-family:var(--font-display);font-size:20px;color:var(--brown);margin:0 0 12px">Grouped and tied out</p>
+              <ul>
+            <li>One deposit becomes one task, not three separate reconciliations</li>
+            <li>Each line is matched to an invoice, then sorted by the customer it belongs to</li>
+            <li>Every customer's total has to match the remittance before any of it posts</li>
+              </ul>
+            </div>
+            <div>
+          <div class="flow-step"><i class="rail"></i><b>1</b><div><strong>Lines sorted by customer</strong><span>Each line on the remittance is matched to its invoice, then sorted into one group per customer. Three customers means three groups.</span></div></div>
+          <div class="flow-step"><i class="rail"></i><b>2</b><div><strong>Each customer's total checked separately</strong><span>No part of the deposit posts until every group ties out against the remittance.</span></div></div>
+              <div class="fork">
+                <div class="auto"><span>Auto-resolved</span><p>All totals match, so the payment posts across every customer.</p></div>
+                <div class="human"><span>Human review</span><p>A total is off. Monk flags suggestions for review.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Exception 04 of 6: Penny variances on fuel">
+          <div class="slide-grid">
+            <div>
+              <div class="slide-n">Exception 04</div>
+              <h3>Penny variances on fuel</h3>
+              <span class="slide-trigger"><b>Trigger</b><br/>A payment lands pennies under the invoiced load</span>
+              <p style="font-family:var(--font-display);font-size:20px;color:var(--brown);margin:0 0 12px">Absorbed, and recorded</p>
+              <ul>
+            <li>You set two limits: a dollar amount and a percentage of the invoice</li>
+            <li>A payment short by less than either one closes the invoice automatically</li>
+            <li>The few cents are written off as their own line, so nothing is hidden</li>
+              </ul>
+            </div>
+            <div>
+          <div class="flow-step"><i class="rail"></i><b>1</b><div><strong>Shortfall checked against your limits</strong><span>You set both, for example $5 or half a percent. A few cents off the DOE fuel average falls under both. Hundreds of dollars falls under neither.</span></div></div>
+          <div class="flow-step"><i class="rail"></i><b>2</b><div><strong>Difference written off as its own line</strong><span>The write-off is recorded separately, so you can report it by payer rather than lose it inside the invoice.</span></div></div>
+              <div class="fork">
+                <div class="auto"><span>Auto-resolved</span><p>The invoice closes, and the write-off stays reportable by payer.</p></div>
+                <div class="human"><span>Human review</span><p>Too large to absorb. Treated as a real short pay.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Exception 05 of 6: Two subsidiaries, one pipeline">
+          <div class="slide-grid">
+            <div>
+              <div class="slide-n">Exception 05</div>
+              <h3>Two subsidiaries, one pipeline</h3>
+              <span class="slide-trigger"><b>Trigger</b><br/>A deposit lands in the brokerage subsidiary's account</span>
+              <p style="font-family:var(--font-display);font-size:20px;color:var(--brown);margin:0 0 12px">One connection, two sets of books</p>
+              <ul>
+            <li>Your single NetSuite connection covers both subsidiaries, not two integrations</li>
+            <li>Monk reads the subsidiary off each record and keeps the two sets of books apart</li>
+            <li>A payment into one subsidiary is never applied to the other's invoices</li>
+              </ul>
+            </div>
+            <div>
+          <div class="flow-step"><i class="rail"></i><b>1</b><div><strong>Subsidiary read off the record</strong><span>Each subsidiary is mapped to its own books inside Monk, and every invoice is routed by the subsidiary named on the record.</span></div></div>
+          <div class="flow-step"><i class="rail"></i><b>2</b><div><strong>Payment applied within that entity only</strong><span>An unmapped subsidiary is held back rather than misfiled.</span></div></div>
+              <div class="fork">
+                <div class="auto"><span>Auto-resolved</span><p>A match is found in that subsidiary, so it posts to the right books.</p></div>
+                <div class="human"><span>Human review</span><p>No match there. The search is never widened to the other subsidiary.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Exception 06 of 6: One remit line, two customer codes">
+          <div class="slide-grid">
+            <div>
+              <div class="slide-n">Exception 06</div>
+              <h3>One remit line, two customer codes</h3>
+              <span class="slide-trigger"><b>Trigger</b><br/>Ryder pays linehaul and accessorial on a single remit line</span>
+              <p style="font-family:var(--font-display);font-size:20px;color:var(--brown);margin:0 0 12px">Split, not guessed</p>
+              <ul>
+            <li>Pabst bills on two codes: linehaul and fuel on one, accessorials on the other</li>
+            <li>The accessorial carries the same order number with A, B or C on the end</li>
+            <li>Ryder pays both on one remit line, and Monk splits it across the two codes</li>
+              </ul>
+            </div>
+            <div>
+          <div class="flow-step"><i class="rail"></i><b>1</b><div><strong>Both codes pulled from one order number</strong><span>Order 884213 is the linehaul and fuel invoice. 884213A, B or C are its accessorials, on the second code.</span></div></div>
+          <div class="flow-step"><i class="rail"></i><b>2</b><div><strong>Line split by what each invoice is owed</strong><span>One rule teaches Monk the pattern, taken from your own numbering.</span></div></div>
+              <div class="fork">
+                <div class="auto"><span>Auto-resolved</span><p>The parts add up to the line, so both codes close together.</p></div>
+                <div class="human"><span>Human review</span><p>The parts do not add up. Monk flags a suggested match.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="slider-dots" role="tablist" aria-label="Choose an exception">
+        <button type="button" data-dot="0" aria-label="Exception 1" aria-current="true"></button>
+        <button type="button" data-dot="1" aria-label="Exception 2"></button>
+        <button type="button" data-dot="2" aria-label="Exception 3"></button>
+        <button type="button" data-dot="3" aria-label="Exception 4"></button>
+        <button type="button" data-dot="4" aria-label="Exception 5"></button>
+        <button type="button" data-dot="5" aria-label="Exception 6"></button>
+    </div>
+  </div>
+
+  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">And two more <em>from your own calls</em>.</h2>
 
   <div class="exc-grid">
     <div class="exc-card">
@@ -306,29 +472,6 @@
       <div class="resolve">
         <b>Monk</b> learns the reference-number format and the parent and child split once, then
         applies it to every remittance after, tying each customer total out before anything posts.
-      </div>
-    </div>
-    <div class="exc-card">
-      <span class="trig">Ryder Share, one line, two codes</span>
-      <p>
-        Pabst pays through Ryder Share. Line haul and fuel sit on one customer code, accessorials on
-        another with an A suffix. The remittance combines them on a single line, so the split has to
-        be worked out from open AR before cash can be recorded.
-      </p>
-      <div class="resolve">
-        <b>Monk</b> reads the code suffix, pulls the open AR for both, and proposes the split with
-        the reason shown. It will not post a payment it cannot tie out.
-      </div>
-    </div>
-    <div class="exc-card">
-      <span class="trig">Third-party payers, bundled</span>
-      <p>
-        Payment vendors settle three or more customers in a single payment. Separating it, totalling
-        each customer and applying them individually is the single biggest time sink in the day.
-      </p>
-      <div class="resolve">
-        <b>Monk</b> splits the bundle by customer, matches each total to its own open invoices, and
-        surfaces only the portion it cannot resolve.
       </div>
     </div>
     <div class="exc-card">
@@ -593,11 +736,12 @@
 <section class="roi-handoff">
   <div>
     <p class="eyebrow">Next step</p>
-    <h2>Send the aging by bucket.</h2>
+    <h2>We would like to build this <em>with your team</em>.</h2>
     <p class="lede">
-      Both the AR balance and the past-due figure on this page are derived from DSO, because no
-      bucketed aging report has been shared yet. One export turns the estimate into a measurement,
-      and sharpens every number above it.
+      A 60-day pilot, cancellable at any time, with the fee credited against the annual term. We
+      implement in full, connect NetSuite, build your payer rules and code splits, and start applying
+      cash. You get a named team in a DCL Teams channel, seven days a week, on your hours. Whether it
+      continues is your call at day sixty, on the numbers.
     </p>
   </div>
   <div>

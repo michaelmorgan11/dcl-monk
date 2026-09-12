@@ -201,6 +201,62 @@
     });
   });
 
+  /* ---------- exception slider ---------- */
+  (function () {
+    var root = document.querySelector('[data-slider]');
+    if (!root) { return; }
+
+    var track  = root.querySelector('[data-track]');
+    var slides = [].slice.call(track.children);
+    var dots   = [].slice.call(root.querySelectorAll('[data-dot]'));
+    var prev   = root.querySelector('[data-prev]');
+    var next   = root.querySelector('[data-next]');
+    var now    = $('sl-now');
+    var i      = 0;
+
+    function go(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      dots.forEach(function (d, k) {
+        if (k === i) { d.setAttribute('aria-current', 'true'); }
+        else { d.removeAttribute('aria-current'); }
+      });
+      // off-screen slides are hidden from assistive tech and taken out of the tab order
+      slides.forEach(function (sl, k) {
+        sl.setAttribute('aria-hidden', String(k !== i));
+        sl.inert = k !== i;
+      });
+      if (now) { now.textContent = i + 1; }
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    }
+
+    prev.addEventListener('click', function () { go(i - 1); });
+    next.addEventListener('click', function () { go(i + 1); });
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { go(i - 1); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { go(i + 1); e.preventDefault(); }
+    });
+
+    // touch: a horizontal drag of more than 45px moves a slide
+    var x0 = null, y0 = null;
+    root.addEventListener('touchstart', function (e) {
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+    }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (x0 === null) { return; }
+      var dx = e.changedTouches[0].clientX - x0;
+      var dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { go(i + (dx < 0 ? 1 : -1)); }
+      x0 = y0 = null;
+    }, { passive: true });
+
+    root.setAttribute('tabindex', '0');
+    go(0);
+  })();
+
   window.addEventListener('resize', render);
   render();
 })();
