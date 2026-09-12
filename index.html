@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Monk × Direct Connect Logistix | Executive Partnership</title>
+<meta name="author" content="Monk"/>
+<meta name="description" content="A private executive business case for cash application, billing accuracy and working capital at Direct Connect Logistix."/>
+<meta property="og:title" content="Monk × Direct Connect Logistix | Executive Partnership"/>
+<meta property="og:description" content="The business case, operating model, and path to partnership for DCL."/>
+<meta property="og:type" content="website"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<nav class="site-nav">
+  <img class="logo" src="assets/logos/monk.png" alt="Monk"/>
+  <div class="nav-links">
+    <a href="#roi">Business case</a>
+    <a href="#story">What we heard</a>
+    <a href="#platform">Platform</a>
+    <a href="#trajectory">Match rate</a>
+    <a href="#proof">Proof</a>
+    <a href="#partnership">Partnership</a>
+  </div>
+  <a class="btn btn-primary" href="#partnership">Book working session</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="opening" id="top">
+  <div>
+    <div class="lockup">
+      <img class="lockup-monk" src="assets/logos/monk-light.png" alt="Monk"/>
+      <span class="lockup-x">&times;</span>
+      <img class="lockup-logo lockup-logo-bare" src="assets/logos/dcl.png" alt="Direct Connect Logistix"/>
+    </div>
+    <div class="prepared"><i></i> Prepared for Direct Connect Logistix &middot; September 2026</div>
+    <h1>Cash applied on arrival, and rate drift caught <em>while the window is open</em></h1>
+    <div class="hero-figure">
+      <span class="hero-cash">$2.2M</span>
+      <p class="hero-cash-label">
+        of three-year benefit: revenue recovered before the rebill window closes, working capital
+        out of the past-due book, and the next AR hire deferred.
+      </p>
+    </div>
+    <p class="sub">
+      13,000 invoices a month against one cash application seat, on a $400M book growing by
+      30,000 loads a year. Monk applies the cash, splits the bundled remits, and watches the
+      customer TMS after you bill.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#roi">Build the business case</a>
+      <a class="btn btn-ghost btn-on-dark" href="#partnership">See the rollout plan</a>
+    </div>
+  </div>
+  <div class="hero-facts">
+    <div><strong>$1,095,890</strong><span>One day of DSO at $400M of revenue</span></div>
+    <div><strong>13,000 / mo</strong><span>Invoices against one cash application seat</span></div>
+    <div><strong>42 &rarr; 40.8</strong><span>DSO today against the modelled lever</span></div>
+    <div><strong>3&ndash;4 weeks</strong><span>NetSuite connected and applying cash</span></div>
+  </div>
+</section>
+
+<!-- ============ ROI ============ -->
+<section class="section" id="roi">
+  <p class="eyebrow">The business case</p>
+  <h2>Model it with <em>your own numbers</em>.</h2>
+  <p class="lede">
+    Every input is editable. The defaults are the figures from the August 25 and September 1 calls:
+    $400M of revenue, DSO at 42 against weighted terms of net 39, and revenue leakage Keegan sized
+    off the cuff at a couple hundred thousand dollars. Cost of capital and the loaded cost of an AR
+    hire are placeholders. Overwrite them with yours.
+  </p>
+
+  <div class="scenario-control" role="group" aria-label="Scenario" style="margin-top:30px">
+    <button class="chip" data-reduction="25" data-scenario>Conservative &middot; 25%</button>
+    <button class="chip" data-reduction="40" data-scenario aria-pressed="true">Base case &middot; 40%</button>
+    <button class="chip" data-reduction="60" data-scenario>Aggressive &middot; 60%</button>
+  </div>
+
+  <div class="calc">
+    <div class="calc-inputs">
+      <div class="calc-group">
+        <h3>Your inputs</h3>
+        <label class="calc-field">
+          <span>Revenue this year<small>$400M, Keegan, August 25</small></span>
+          <input id="rev" type="number" value="400000000" step="10000000"/>
+        </label>
+        <label class="calc-field">
+          <span>AR balance today<small>Derived: DSO 42 x $400M / 365</small></span>
+          <input id="ar" type="number" value="46000000" step="1000000"/>
+        </label>
+        <label class="calc-field">
+          <span>Past-due AR today<small>Derived: DSO 42 less terms 39 = 3 days</small></span>
+          <input id="pastdue" type="number" value="3300000" step="100000"/>
+        </label>
+        <label class="calc-field">
+          <span>Reduction on past-due AR (%)<small>The lever. 40% is 1.2 DSO days</small></span>
+          <input id="reduction" type="number" value="40" step="5"/>
+        </label>
+        <label class="calc-field">
+          <span>Cost of capital (%)<small>Placeholder. Usually the revolver rate</small></span>
+          <input id="coc" type="number" value="9" step="0.5"/>
+        </label>
+        <label class="calc-field">
+          <span>Annual revenue leakage<small>Underbilling and fuel drift. Confirm</small></span>
+          <input id="leakage" type="number" value="250000" step="25000"/>
+        </label>
+        <label class="calc-field">
+          <span>Share recoverable in the window (%)<small>Still collectable inside 60 or 90 days</small></span>
+          <input id="share" type="number" value="50" step="5"/>
+        </label>
+        <label class="calc-field">
+          <span>Loaded cost of an AR hire<small>Deferred in years one and two</small></span>
+          <input id="hire" type="number" value="85000" step="5000"/>
+        </label>
+      </div>
+    </div>
+
+    <div class="results-column">
+      <div class="cash-result">
+        <p>Three-year benefit</p>
+        <strong id="o-threeyear">$2.22M</strong>
+        <span>
+          <b id="o-release">$1.32M</b> of working capital out of the past-due book, plus recurring
+          value across three years. That is <b id="o-daysout">1.2</b> days of DSO, taking
+          <b id="o-dsonow">42</b> to <b id="o-dsonew">40.8</b>.
+        </span>
+        <div class="result-tiles">
+          <div><strong id="o-recurring">$329K</strong><span>Recurring annual value</span></div>
+          <div><strong>1,820</strong><span>Hours a year returned to AR</span></div>
+          <div><strong id="o-roi">3.6&times;</strong><span>Year-one return</span></div>
+          <div><strong id="o-payback">3 mo</strong><span>Payback period</span></div>
+        </div>
+      </div>
+
+      <div class="value-card">
+        <h3>How it builds</h3>
+        <div class="bridge-row"><span class="lbl">Working capital out of the past-due book, once</span><span class="val" id="b-release">$1.32M</span></div>
+        <div class="bridge-row"><span class="lbl">Carrying benefit on that release, per year</span><span class="val" id="b-carry">$119K</span></div>
+        <div class="bridge-row"><span class="lbl">Fuel drift and underbilling recovered, per year</span><span class="val" id="b-fuel">$125K</span></div>
+        <div class="bridge-row"><span class="lbl">AR hire deferred, years one and two</span><span class="val" id="b-hire">$85K</span></div>
+        <div class="bridge-row total"><span class="lbl">Year-one recurring value</span><span class="val" id="b-total">$329K</span></div>
+        <p class="note">
+          The AR balance and the past-due figure are both derived, because no bucketed aging report
+          has been shared yet. Send the aging by bucket and these sharpen immediately. Hours are a
+          count, not a dollar line: they are what defers the hire, so they are not counted twice.
+          One day of DSO at $400M is <b id="o-perday">$1,095,890</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="section" id="story">
+  <p class="eyebrow">What we heard</p>
+  <h2>Four constraints behind <em>a lean AR function</em>.</h2>
+  <p class="lede">
+    Drawn from the August 17 intro, the August 25 session in Indianapolis, and the September 1
+    proposal review. These are the four your team named.
+  </p>
+
+  <blockquote class="story-quote">
+    &ldquo;The majority are going to be easy. But the headache ones are headaches,
+    <mark>that&rsquo;s exactly what they are</mark>.&rdquo;
+    <cite>Leslie Maish &middot; Director of Finance &middot; August 25</cite>
+  </blockquote>
+
+  <div class="stat-strip">
+    <div><strong>13,000</strong><p>Invoices a month, one per load, against a single cash application seat</p></div>
+    <div><strong>30,000</strong><p>Additional loads year over year, with 10 to 15 thousand left before the next AR hire</p></div>
+    <div><strong>90%</strong><p>Of rate discrepancies are fuel related, and they appear after billing</p></div>
+  </div>
+
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="n">01 &middot; CASH APPLICATION</div>
+      <h3>One seat, a whole day, every day</h3>
+      <p>
+        A bank file is pulled each morning, remittances are hunted in the shared inbox, and matches
+        are made by hand against NetSuite. The work runs a day or two in arrears. NetSuite's own
+        cash application module was tried inside the last twelve months and abandoned.
+      </p>
+      <div class="said">&ldquo;It was a disaster. It was just guessing.&rdquo;</div>
+    </div>
+    <div class="gap-card">
+      <div class="n">02 &middot; BILLING ACCURACY</div>
+      <h3>Rates match at billing, then drift</h3>
+      <p>
+        Rates are verified against the customer TMS before the invoice goes out. A week or two later
+        the DOE diesel average moves and the customer's rate changes underneath it. The discrepancy
+        surfaces only at cash application, often past the 60 or 90 day correction window.
+      </p>
+      <div class="said">&ldquo;Ninety percent of them are fuel related.&rdquo;</div>
+    </div>
+    <div class="gap-card">
+      <div class="n">03 &middot; TEAM CAPACITY</div>
+      <h3>The book grows faster than the team</h3>
+      <p>
+        Two collectors cover the entire book, touching each account every other week at best. One
+        specialist applies all the cash. The business is hiring 50 or more people over 18 months,
+        almost all of it front office.
+      </p>
+      <div class="said">&ldquo;We&rsquo;ve got another ten to fifteen thousand loads to go. We&rsquo;re getting close.&rdquo;</div>
+    </div>
+    <div class="gap-card">
+      <div class="n">04 &middot; VISIBILITY</div>
+      <h3>The weekly meeting runs off Excel</h3>
+      <p>
+        Two collectors write notes into a shared spreadsheet that keeps growing. Missing remittances
+        are tracked as &ldquo;requested remit&rdquo; in the same file. Aging buckets show the balance
+        but not the reason behind it.
+      </p>
+      <div class="said">&ldquo;Instead of us having to go manually find where the problems are.&rdquo;</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="section-dark" style="text-align:center;min-height:420px;display:grid;place-content:center;
+  background:
+    radial-gradient(circle at 80% 12%,color-mix(in oklab,var(--primary) 34%,transparent),transparent 38%),
+    radial-gradient(circle at 16% 92%,color-mix(in oklab,var(--highlight) 7%,transparent),transparent 42%),
+    var(--dark);">
+  <img class="logo logo-statement" src="assets/logos/monk-light.png" alt="Monk"/>
+  <h2 style="max-width:24ch;margin:34px auto 20px;font-size:clamp(44px,5.4vw,74px);line-height:1">
+    The discrepancy is found at cash application. <em>It is created at billing.</em>
+  </h2>
+  <p class="lede" style="margin:0 auto;max-width:760px;font-size:18px">
+    Every day between the rate moving and your team seeing it is a day closer to a correction window
+    closing. Monk re-checks the customer's TMS on a schedule after you bill, isolates the charge that
+    moved, and routes it to rebill while there is still time to collect it.
+  </p>
+</section>
+
+<!-- ============ PLATFORM ============ -->
+<section class="section" id="platform">
+  <p class="eyebrow">The operating model</p>
+  <h2>Three connections. <em>NetSuite stays</em> the system of record.</h2>
+  <p class="lede">
+    A two-way NetSuite sync across both subsidiaries, a read-only Bank of America feed through Plaid
+    or Atler, and the remittance inbox. Monk writes the payment object and the transaction record,
+    never the invoice record, so there is one source of truth and nothing to reconcile afterwards.
+  </p>
+
+  <div style="margin-top:38px">
+    <div class="compare-head">
+      <span></span><span>Today</span><span>With Monk</span>
+    </div>
+    <div class="compare-row">
+      <strong>Applying cash</strong>
+      <span>Bank file pulled each morning, remittances hunted in the inbox, matches made by hand. A day or two in arrears.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Matched on arrival against open invoices, remittance and bank memo, and pushed to NetSuite on approval.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Exceptions</strong>
+      <span>Held in the tribal knowledge of the people who have done it longest, and re-derived every time.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Seen once, turned into a rule, applied to every remittance after. The rule outlives the person.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Fuel variance</strong>
+      <span>A few dollars off stops the match and routes a load to a person to research.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Threshold rules absorb the variance and apply the payment. Only real breaks reach a person.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Rate drift</strong>
+      <span>Found at cash application, sometimes after the 60 or 90 day correction window has closed.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Customer TMS re-checked on a schedule after billing, with the charge that moved isolated and days left to rebill.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Missing remittance</strong>
+      <span>Marked &ldquo;requested remit&rdquo; on a shared spreadsheet, then chased by email and waited on.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>A playbook fires on the unmatched payment and asks that customer's AP for the detail within hours.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Collector worklist</strong>
+      <span>A weekly meeting off two collectors' Excel notes, with aging buckets but no reason behind them.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>A ranked morning worklist per collector, mapped from NetSuite account owners, with payment risk flagged as it turns.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Write-offs</strong>
+      <span>Short pays and overpays sit on the balance sheet until someone works out the reason.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Coded with the reason attached and routed, so revenue lands on the original order and commissions hold.</span>
+    </div>
+  </div>
+
+  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">The remittances <em>your team called headaches</em>.</h2>
+
+  <div class="exc-grid">
+    <div class="exc-card">
+      <span class="trig">Grief and Kerastar, jumbled</span>
+      <p>
+        Grief pays on its own reference numbers rather than DCL invoice numbers, and Grief and
+        Kerastar loads are mixed together down the remittance with nothing in the number to tell
+        them apart. Long remits take real time to dissect.
+      </p>
+      <div class="resolve">
+        <b>Monk</b> learns the reference-number format and the parent and child split once, then
+        applies it to every remittance after, tying each customer total out before anything posts.
+      </div>
+    </div>
+    <div class="exc-card">
+      <span class="trig">Ryder Share, one line, two codes</span>
+      <p>
+        Pabst pays through Ryder Share. Line haul and fuel sit on one customer code, accessorials on
+        another with an A suffix. The remittance combines them on a single line, so the split has to
+        be worked out from open AR before cash can be recorded.
+      </p>
+      <div class="resolve">
+        <b>Monk</b> reads the code suffix, pulls the open AR for both, and proposes the split with
+        the reason shown. It will not post a payment it cannot tie out.
+      </div>
+    </div>
+    <div class="exc-card">
+      <span class="trig">Third-party payers, bundled</span>
+      <p>
+        Payment vendors settle three or more customers in a single payment. Separating it, totalling
+        each customer and applying them individually is the single biggest time sink in the day.
+      </p>
+      <div class="resolve">
+        <b>Monk</b> splits the bundle by customer, matches each total to its own open invoices, and
+        surfaces only the portion it cannot resolve.
+      </div>
+    </div>
+    <div class="exc-card">
+      <span class="trig">No remittance at all</span>
+      <p>
+        The same handful of customers never send one. Today that becomes a note on a shared
+        spreadsheet and a wait that can run days.
+      </p>
+      <div class="resolve">
+        <b>Monk</b> triggers a playbook to that customer's AP within hours of the unmatched payment
+        landing, and the thread stays visible in Outlook.
+      </div>
+    </div>
+  </div>
+
+  <div class="pills">
+    <span class="pill">Payer and payee name variants</span>
+    <span class="pill">Parent and child accounts</span>
+    <span class="pill">Fuel variance thresholds</span>
+    <span class="pill">Short pay coding</span>
+    <span class="pill">Overpayment queue</span>
+    <span class="pill">Accessorial disputes</span>
+    <span class="pill">Lumper, detention, layover</span>
+    <span class="pill">Checks and remote deposit</span>
+    <span class="pill">Lockbox files</span>
+    <span class="pill">PDF and Excel remittances</span>
+    <span class="pill">BOL and order number keys</span>
+    <span class="pill">Multi-invoice settlements</span>
+    <span class="pill">W-9 and tax forms</span>
+    <span class="pill">Statement requests</span>
+    <span class="pill">Promise to pay</span>
+    <span class="pill">Bounced email</span>
+  </div>
+
+  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">TMS coverage, <em>scoped for your book</em>.</h2>
+  <p class="lede">
+    Monk has automated submission and status checks against AP portals for years. The same machinery
+    points at the transportation systems your customers price in, with a human validating any parse
+    before it is trusted.
+  </p>
+  <div style="margin-top:28px">
+    <div class="compare-head" style="grid-template-columns:.45fr .35fr 1fr">
+      <span>System</span><span>Method</span><span>What Monk checks</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.45fr .35fr 1fr">
+      <strong>CASS</strong><span>API</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Freight invoice amounts against CASS rate data</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.45fr .35fr 1fr">
+      <strong>E2open</strong><span>API</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Current customer transportation rates after invoicing</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.45fr .35fr 1fr">
+      <strong>RyderShare</strong><span>API</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Billing rates and invoice changes, including the A-suffix codes</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.45fr .35fr 1fr">
+      <strong>Syncada</strong><span>API</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Billed freight amounts against Syncada rate data</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.45fr .35fr 1fr">
+      <strong>Uber Freight</strong><span>API</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Freight charges against Uber Freight rate data</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.45fr .35fr 1fr">
+      <strong>Lots</strong><span>Browser agent</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Rate and billing detail, no public API required</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Said plainly.</b> Rate checking against customer TMSs is new work for Monk. The parsing and
+    scheduled-check machinery is not, and neither is the human validation layer behind it. It is
+    scoped as <span class="big">phase three</span>, after cash application is live and your team is
+    comfortable, so it never puts the core of the rollout at risk.
+  </div>
+</section>
+
+<!-- ============ TRAJECTORY ============ -->
+<section class="section-dark" id="trajectory">
+  <p class="eyebrow">Trajectory</p>
+  <h2>Why the match rate <em>compounds</em>.</h2>
+  <p class="lede">
+    NetSuite's native matching plateaus because it only ever checks a name and an amount. Monk starts
+    above that and keeps climbing, because every exception your team resolves becomes a rule that
+    resolves it automatically the next time.
+  </p>
+
+  <div class="dso-card">
+    <div id="chart"></div>
+    <div class="legend">
+      <span><i style="background:rgba(252,250,247,.42)"></i>ERP native, 40 to 60%</span>
+      <span><i style="background:var(--primary)"></i>Monk, 65% rising past 90%</span>
+      <span><i style="background:var(--highlight)"></i>Week one, go live</span>
+    </div>
+  </div>
+
+  <div style="margin-top:44px">
+    <div class="compare-row">
+      <strong>Layer one</strong>
+      <span>Your own patterns, set by your team: name variants, code splits, multi-invoice settlements.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Built once from your real remittances, then applied forever. Monk suggests the rule from the match your team just made.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Layer two</strong>
+      <span>Deterministic checks on amount, customer name, memo and timing. This is the layer NetSuite stops at.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Clears the easy majority with no model involved and no chance of a creative answer.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Layer three</strong>
+      <span>The investigative work a person does now: read the remit, read the email, scan open AR, decide.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Proposes a match with a confidence score and the reason shown, so the thinking can be spot checked.</span>
+    </div>
+    <div class="compare-row">
+      <strong>The guardrail</strong>
+      <span>Leslie's stated fear: that an automated system starts applying things wrong.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Nothing auto-applies below 100% confidence. Everything else waits in a review queue. A wrong application costs more than a slow one.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROOF ============ -->
+<section class="section-secondary" id="proof">
+  <p class="eyebrow">Proof</p>
+  <h2>Results we've driven for <em>similar businesses</em>.</h2>
+
+  <div class="proof-grid">
+    <div class="case">
+      <div class="case-logo-wrap"><img class="case-logo" src="assets/logos/outerseas.png" alt="Outerseas"/></div>
+      <div class="cat">Wholesale &amp; logistics</div>
+      <div class="metrics">
+        <div><span class="m">85%</span><span class="t">reduction in the 1&ndash;30 day AR aging bucket since go-live</span></div>
+        <div><span class="m">43%</span><span class="t">reduction in the 90&ndash;120 day bucket</span></div>
+        <div><span class="m">&lt;1 mo</span><span class="t">from signed to fully operational</span></div>
+      </div>
+      <blockquote>
+        &ldquo;Monk integrated with my systems in just a few weeks. They took over all invoicing and
+        the platform handled the complexity of my wholesaler business.&rdquo;
+        <cite>Kyle Lee &middot; CEO</cite>
+      </blockquote>
+    </div>
+    <div class="case">
+      <h3 style="font-size:26px">Variable-rate billing</h3>
+      <div class="cat">What the Outerseas build actually was</div>
+      <div class="metrics">
+        <div><span class="m">Every</span><span class="t">line priced by actual catch weight, with different pricing, shipping and terms per account</span></div>
+        <div><span class="m">Auto</span><span class="t">per-account terms, priority dispatch on high-value accounts, structured numbering</span></div>
+        <div><span class="m">&lt;1 wk</span><span class="t">integration completed</span></div>
+      </div>
+      <blockquote>
+        Account rules that used to live in people's heads now run as a system. The same shape of
+        problem as a load priced on a rate that moves after it ships.
+      </blockquote>
+    </div>
+    <div class="case">
+      <h3 style="font-size:26px">How Monk works</h3>
+      <div class="cat">Not a vendor, not a tool</div>
+      <div class="metrics">
+        <div><span class="m">92%</span><span class="t">of pilots at this scale converted to an annual partnership in the last eight months</span></div>
+        <div><span class="m">7D</span><span class="t">support in a dedicated DCL Teams channel, East coast hours</span></div>
+        <div><span class="m">1 yr</span><span class="t">agreements, not a multi-year lock. Multi-year is available, not required</span></div>
+      </div>
+      <blockquote>
+        Success is measured by cash collected, DSO moved and write-offs eliminated. A named
+        strategist, a custom playbook, and an internal commitment to DCL's numbers.
+      </blockquote>
+    </div>
+  </div>
+
+  <div style="margin-top:46px">
+    <div class="compare-head" style="grid-template-columns:.55fr 1fr 1fr">
+      <span>Customer</span><span>What we noticed</span><span>Result</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.55fr 1fr 1fr">
+      <strong>Regional roofing contractor</strong>
+      <span>Payer response data showed customers were 3&times; more likely to respond to calls than email, so we built a voice module for their payer base.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>56% reduction in the 60+ day aging bucket from a single channel insight.</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.55fr 1fr 1fr">
+      <strong>AI SaaS</strong>
+      <span>Flux analysis revealed completed work that had never been billed, invisible to their finance team.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>$1.1M in unbilled revenue surfaced and collected in under a week.</span>
+    </div>
+    <div class="compare-row" style="grid-template-columns:.55fr 1fr 1fr">
+      <strong>Real estate tech</strong>
+      <span>Billing frequency analysis showed larger invoices were paid faster, so monthly billing was moved to quarterly.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>9% DSO reduction in two weeks from one structural change.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERSHIP ============ -->
+<section class="section" id="partnership">
+  <p class="eyebrow">Path to partnership</p>
+  <h2>Cash application live in weeks. <em>TMS rate tracking after</em>.</h2>
+  <p class="lede">
+    Phased deliberately, because a lean team should not absorb two new systems at once. Keegan and
+    Leslie both asked for one thing at a time, and the plan reflects that. The 60-day pilot is
+    cancellable and its fee credits against the annual term.
+  </p>
+
+  <div class="phases">
+    <div class="phase active">
+      <div class="when">Weeks 1&ndash;3</div>
+      <h3>Connect and ingest</h3>
+      <ul>
+        <li>NetSuite two-way sync, both subsidiaries</li>
+        <li>Bank of America read-only feed</li>
+        <li>Remittance inbox connected to Outlook</li>
+        <li>Payment object and transaction record only</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Weeks 3&ndash;12</div>
+      <h3>Cash application and collections</h3>
+      <ul>
+        <li>Exception rules built from your real remittances</li>
+        <li>Fuel thresholds, review and no-suggestion queues</li>
+        <li>Collector logins, playbooks, morning worklist</li>
+        <li>Match rate measured against the week-three baseline</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Month 3 onward</div>
+      <h3>TMS rate tracking</h3>
+      <ul>
+        <li>CASS, E2open, Syncada, RyderShare, Uber Freight</li>
+        <li>Scheduled rate checks against the customer TMS after billing</li>
+        <li>Drift queue routed to rebill, with days left to act</li>
+        <li>McLeod write-back scoped with Patrick and the IT team</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:34px">
+    <b>One open item we owe you.</b> Leslie's ideal is catching the rate <i>before</i> billing, at the
+    McLeod level, so cash application is clean on arrival. What is scoped today watches the customer
+    TMS <i>after</i> billing and routes the rebill. McLeod has an open API, and Patrick confirmed it is
+    workable. Which functions we need to hit is the next technical conversation, not an assumption.
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="section" id="team">
+  <p class="eyebrow">Your team</p>
+  <h2>DCL's <em>dedicated Monk team</em>.</h2>
+  <p class="lede">
+    East coast based, 7 days a week support in a dedicated Teams channel, hands-on for the duration
+    of the relationship, not just implementation. DCL has direct access to company leadership.
+  </p>
+  <div class="team">
+    <div class="person"><img src="assets/team/george-kurdin.jpg" alt="George Kurdin" loading="lazy"/><div class="nm">George Kurdin</div><div class="rl">CEO</div></div>
+    <div class="person"><img src="assets/team/michael-morgan.jpg" alt="Michael Morgan" loading="lazy"/><div class="nm">Michael Morgan</div><div class="rl">National Partnerships</div></div>
+    <div class="person"><img src="assets/team/henry-mcqueen.jpg" alt="Henry McQueen" loading="lazy"/><div class="nm">Henry McQueen</div><div class="rl">Implementation Lead</div></div>
+    <div class="person"><img src="assets/team/nurah-kutty.jpg" alt="Nurah Kutty" loading="lazy"/><div class="nm">Nurah Kutty</div><div class="rl">Customer Success Lead</div></div>
+    <div class="person"><img src="assets/team/brodie-marshall.jpg" alt="Brodie Marshall" loading="lazy"/><div class="nm">Brodie Marshall</div><div class="rl">Dedicated Engineer</div></div>
+    <div class="person"><img src="assets/team/francesco-coacci.jpg" alt="Francesco Coacci" loading="lazy"/><div class="nm">Francesco Coacci</div><div class="rl">Agent Strategist</div></div>
+  </div>
+</section>
+
+<!-- ============ HANDOFF ============ -->
+<section class="roi-handoff">
+  <div>
+    <p class="eyebrow">Next step</p>
+    <h2>Send the aging by bucket.</h2>
+    <p class="lede">
+      Both the AR balance and the past-due figure on this page are derived from DSO, because no
+      bucketed aging report has been shared yet. One export turns the estimate into a measurement,
+      and sharpens every number above it.
+    </p>
+  </div>
+  <div>
+    <div class="handoff-result">
+      <span>Your scenario</span>
+      <strong id="h-three">$2.22M</strong>
+      <p>three-year benefit at <b id="h-days">1.2</b> days of DSO out of the past-due book</p>
+    </div>
+    <a class="btn btn-primary" href="mailto:michael@monk.com?subject=Monk%20%C3%97%20DCL%20%E2%80%94%20next%20step">Email Michael</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>
+    <img class="logo" src="assets/logos/monk.png" alt="Monk"/>
+    <div style="font-size:14px;margin-top:10px;color:var(--muted-foreground)">
+      Michael Morgan &middot; National Partnerships<br/>
+      <a href="mailto:michael@monk.com">michael@monk.com</a>
+    </div>
+  </div>
+  <div class="trust">
+    <span>SOC 2</span>
+    <span>$1B+ receivables managed</span>
+    <span>New York, NY</span>
+    <span>Confidential &mdash; prepared for Direct Connect Logistix</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
