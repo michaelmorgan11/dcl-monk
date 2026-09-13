@@ -23,6 +23,7 @@
     <a href="#roi">Business case</a>
     <a href="#story">What we heard</a>
     <a href="#platform">Platform</a>
+    <a href="#algorithm">Algorithm</a>
     <a href="#trajectory">Match rate</a>
     <a href="#proof">Proof</a>
     <a href="#partnership">Partnership</a>
@@ -550,6 +551,132 @@
   </div>
 </section>
 
+<!-- ============ ALGORITHM ============ -->
+<section class="section" id="algorithm">
+  <p class="eyebrow">The algorithm</p>
+  <h2>Three layers, and <em>two gates</em> before a dollar moves.</h2>
+  <p class="lede">
+    Most cash application tools are one layer: reference plus amount, and everything else lands on a
+    person. NetSuite's module is that layer, which is why the trial last year ended where it did.
+    Monk runs three layers in strict priority order, and the cheap deterministic ones go first.
+  </p>
+
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="n">TIER 1 &middot; YOUR RULES</div>
+      <h3>The tribal knowledge, written down</h3>
+      <p>
+        What lives in one person's head today, executed automatically. A rule keys off whatever
+        actually identifies the payment: the payer name, a reference on the remittance, the amount,
+        or a pattern in your own numbering.
+      </p>
+      <div class="said">It can point a payment at one customer, split it across several, or take a transaction out of the queue entirely.</div>
+    </div>
+    <div class="gap-card">
+      <div class="n">TIER 2 &middot; DETERMINISTIC</div>
+      <h3>Reference and amount, with the gates native matching lacks</h3>
+      <p>
+        The layer NetSuite stops at, done properly. Monk extracts order and BOL tokens from both the
+        remittance and the bank memo, tests multiple number formats against open invoices, and scores
+        the payer across the full parent and child hierarchy, legal names included.
+      </p>
+      <div class="said">No model is called. A clean payment closes without one.</div>
+    </div>
+    <div class="gap-card">
+      <div class="n">TIER 3 &middot; AI INFERENCE</div>
+      <h3>Only what the first two cannot close</h3>
+      <p>
+        Reading an unstructured PDF remittance and pulling line-level detail. Splitting one
+        third-party deposit across three or more customers. Recognising that a payment covers eleven
+        of the fourteen invoices on a statement, and naming which three are missing.
+      </p>
+      <div class="said">Output is a proposal with a confidence score and written reasoning, never a silent posting.</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">What happens when it <em>is not sure</em>.</h2>
+  <p class="lede">
+    This is the part that separates it from what your team tried last year. Nothing auto-applies
+    until a proposal clears two independent gates, and the second one does not trust the model at all.
+  </p>
+
+  <div class="exc-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    <div class="exc-card">
+      <span class="trig">Gate one &middot; confidence</span>
+      <p>
+        Every invoice in the match has to score at or above a threshold your team sets, not a
+        threshold Monk sets. One weak invoice in an otherwise clean proposal stops the whole posting.
+      </p>
+      <div class="resolve">
+        <b>Your dial.</b> Start it strict, which is what Leslie asked for, and loosen it only once the
+        match rate has earned it.
+      </div>
+    </div>
+    <div class="exc-card">
+      <span class="trig">Gate two &middot; settlement</span>
+      <p>
+        The stronger of the two, and it is pure arithmetic. Monk discards the model's math entirely
+        and recomputes the allocation from its own ledger. Every invoice has to be covered exactly,
+        either by cash or by an explicitly booked adjustment.
+      </p>
+      <div class="resolve">
+        <b>No unexplained gaps.</b> A proposal that clears confidence but leaves a gap of any size is
+        routed to review instead of posted.
+      </div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:72px;font-size:clamp(32px,3.4vw,46px)">Against <em>what you tried</em>.</h2>
+
+  <div style="margin-top:28px">
+    <div class="compare-head">
+      <span></span><span>NetSuite's native module</span><span>Monk</span>
+    </div>
+    <div class="compare-row">
+      <strong>What it matches on</strong>
+      <span>Customer name and amount. One layer, and no way to teach it an exception.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Your rules first, then reference and amount, then AI only on what is left.</span>
+    </div>
+    <div class="compare-row">
+      <strong>When it cannot match</strong>
+      <span>Applied the oldest invoices and left a residual balance. A guess, posted.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Nothing posts. A staged proposal waits with the invoices selected and the reasoning written out.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Wrong applications</strong>
+      <span>A customer assigned to a transaction that had nothing to do with them.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>The settlement gate recomputes every allocation from Monk's own ledger before a dollar moves.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Remittance</strong>
+      <span>Not read. The detail your payers send never reaches the matching decision.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Read on arrival, PDF or Excel, every line and every reference extracted and tried in multiple formats.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Exceptions</strong>
+      <span>Re-derived by a person every time the same payer pays the same way.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Written once as a rule and applied to every payment after it.</span>
+    </div>
+    <div class="compare-row">
+      <strong>Learning</strong>
+      <span>&ldquo;It will train the model and get smarter as it goes.&rdquo; It never did.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Each correction trains the next payment from that payer, and Monk proposes the rule it just learned.</span>
+    </div>
+    <div class="compare-row">
+      <strong>One payment, two customers</strong>
+      <span>Assumes a payment belongs to one customer, so the Ryder line cannot be represented at all.</span>
+      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>A transaction applies to a list of invoices that can cross customer codes, in a single posting.</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Review takes minutes, not hours.</b> Items in the queue are never blank. They arrive with
+    candidate invoices identified, amounts computed, the remittance line attached, and the reason the
+    system stopped short. Your specialist confirms or corrects, and that correction trains the next
+    payment from the same payer. <span class="big">One click</span>, not one investigation.
+  </div>
+</section>
+
 <!-- ============ TRAJECTORY ============ -->
 <section class="section-dark" id="trajectory">
   <p class="eyebrow">Trajectory</p>
@@ -569,28 +696,6 @@
     </div>
   </div>
 
-  <div style="margin-top:44px">
-    <div class="compare-row">
-      <strong>Layer one</strong>
-      <span>Your own patterns, set by your team: name variants, code splits, multi-invoice settlements.</span>
-      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Built once from your real remittances, then applied forever. Monk suggests the rule from the match your team just made.</span>
-    </div>
-    <div class="compare-row">
-      <strong>Layer two</strong>
-      <span>Deterministic checks on amount, customer name, memo and timing. This is the layer NetSuite stops at.</span>
-      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Clears the easy majority with no model involved and no chance of a creative answer.</span>
-    </div>
-    <div class="compare-row">
-      <strong>Layer three</strong>
-      <span>The investigative work a person does now: read the remit, read the email, scan open AR, decide.</span>
-      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Proposes a match with a confidence score and the reason shown, so the thinking can be spot checked.</span>
-    </div>
-    <div class="compare-row">
-      <strong>The guardrail</strong>
-      <span>Leslie's stated fear: that an automated system starts applying things wrong.</span>
-      <span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8.5l3.2 3.2L13 5"/></svg>Nothing auto-applies below 100% confidence. Everything else waits in a review queue. A wrong application costs more than a slow one.</span>
-    </div>
-  </div>
 </section>
 
 <!-- ============ PROOF ============ -->
